@@ -5,7 +5,6 @@ export async function onRequest(context) {
   const country = request.cf ? request.cf.country : 'Unknown';
   const asOrganization = request.cf ? request.cf.asOrganization : '';
   const targetKey = url.searchParams.get('target');
-  const colo = request.cf ? request.cf.colo : '';
   if (targetKey !== 'sensa') {
     return next();
   }
@@ -32,3 +31,4 @@ export async function onRequest(context) {
     .transform(response);
 
 }
+
