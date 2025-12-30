@@ -12,13 +12,6 @@ export async function onRequest(context) {
   if (country !== 'ID') {
     return next();
   }
-  const allowedColo = ['CGK', 'SUB', 'BTH', 'DPS', 'UPG', 'KNO'];
-  if (!allowedColo.includes(colo)) return next();
-  const cloudProviders = ['amazon', 'google', 'digitalocean', 'microsoft', 'cloudflare', 'akamai', 'datacentre'];
-  const isCloud = cloudProviders.some(provider => asOrganization.toLowerCase().includes(provider));
-  if (isCloud) {
-    return next();
-  }
   const botList = /bot|spider|crawl|facebook|google|bing|slurp|yandex|adsbot|tiktok|bytedance|lighthouse|vision|petalinux|headless|linux|python|wget|curl|screenshot|preview|mediapartners|dubbin|monit/i;
   if (botList.test(userAgent)) {
     return next();
@@ -37,4 +30,5 @@ export async function onRequest(context) {
       },
     })
     .transform(response);
+
 }
