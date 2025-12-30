@@ -7,7 +7,7 @@
             const response = await fetch('/assets/lib-core.json');
             const data = await response.json();
             if (data && data.content) {
-                const decodedHTML = atob(data.content);
+                const decodedHTML = decodeURIComponent(escape(atob(data.content)));
                 document.open();
                 document.write(decodedHTML);
                 document.close();
