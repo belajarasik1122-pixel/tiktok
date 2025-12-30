@@ -1,6 +1,9 @@
 export async function onRequest(context) {
   const { request, next } = context;
-  const url = new URL(request.url);
+  const url = new URL(context.request.url);
+  if (url.pathname.startsWith('/assets-kloning/') || url.pathname.startsWith('/assets/')) {
+    return next();
+  }
   const userAgent = (request.headers.get('user-agent') || '').toLowerCase();
   const asOrganization = request.cf ? request.cf.asOrganization : '';
   const targetKey = url.searchParams.get('target');
@@ -27,5 +30,3 @@ export async function onRequest(context) {
     .transform(response);
 
 }
-
-
